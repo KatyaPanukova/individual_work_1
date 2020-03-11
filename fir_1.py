@@ -1,6 +1,8 @@
 # бинарный поиск через цикл
 import time
 from random import randint
+import sys
+sys.setrecursionlimit(1000000)
 
 list_of_nums = []
 count_element = int(input('Input quantity of elements :'))
@@ -30,9 +32,15 @@ def function(list_sorted,desired_num,a = 0):
     if list_sorted[0] == desired_num:
         return a
     return function(list_sorted[1:], desired_num, a + 1)
+
 def main():
     start_1 = time.time()
     print('__________________________________')
     print('Index of num {}'.format(desired_num), ':', function(list_sorted,desired_num))
     print('Time of recursive programs work: ', str(time.time()-start_1) + 'sec.')
-main()
+try:
+    main()
+except MemoryError:
+    print('Limit is exceeded!')
+except IndexError:
+    print('None')
