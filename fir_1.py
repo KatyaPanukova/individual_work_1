@@ -4,7 +4,7 @@ from random import randint
 list_of_nums = []
 count_element = int(input('Input quantity of elements :'))
 
-# создания списка 
+# цикл для создания списка
 
 for i in range(count_element):
     list_of_nums.append(randint(-1000, 1000))
@@ -14,20 +14,24 @@ desired_num = int(input('Input desired number :'))
 n = 0
 
 # итеративный способ
-
-def f(count_element,n):
-    while count_element != 0:
-        if desired_num != list_sorted[n]:
-            count_element -= 1
-        elif desired_num == list_sorted[n]:
-            return n
-        n += 1
+l = 0
+r = len(list_sorted)
+def f(desired_num, list_sorted, r, l):
+    while list_sorted[-1] > list_sorted[0]:
+        c = (l + r) // 2
+        if l >= 0:
+            if list_sorted[l] == desired_num:
+                return l
+        if list_sorted[c - 1] > desired_num:
+            r = c
+        else:
+            l = c
     else:
-        print('None')
+        return None
 # подсчит времени 1
 def main_1():
     start = time.time()
-    print('Index of num :', f(count_element, n))
+    print('Index of num :', f(desired_num, list_sorted, r, l))
     print('Time of iterative programs work:', str(time.time() - start) + ' sec.')
 main_1()
 
